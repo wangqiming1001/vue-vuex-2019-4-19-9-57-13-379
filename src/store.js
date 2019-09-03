@@ -1,15 +1,16 @@
 export default{
-    strict:true,
+   // strict:true,
     state: {
       // 应用的数据
       todoList: [
-        {content:'吃饭',status:'all'},
+        {content:'吃饭',status:'active'},
         {content:'睡觉',status:'active'},
-        {content:'起床',status:'completed'}
-    ]
+        {content:'起床',status:'active'}
+    ],
+        currentFilter: 'all'
     },
     getters:{
-        filterToDoList:function(){
+        filterToDoList:function(state){
             let filterList = [];
             for (let index = 0; index < state.todoList.length; index++) {
                 const element =  state.todoList[index];
@@ -21,13 +22,6 @@ export default{
         }
     },
     mutations:{
-        minusValue(state,index){
-            state.counters[index].value--;
-            state.counterTotal--;
-        },
-        plusValue(state,index){
-            state.counters[index].value++;
-            state.counterTotal++;
-        }
+        
     }
   }

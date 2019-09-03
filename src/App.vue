@@ -7,7 +7,6 @@
             <CreateForm 
                 @addHandle="addInput"
                 @addHandleChange="addChange"
-            
             ></CreateForm>
         <div id="list">
             <ul>
@@ -40,44 +39,47 @@
                  * 定义了 todo item 中属性为 {content:'吃饭',status:'active'}
                  * 定义了 todo 的两种状态 completed、active，默认为 active
                  */
-                todoList: [
-                    {content:'吃饭',status:'active'},
-                    {content:'睡觉',status:'active'},
-                    {content:'起床',status:'active'}
-                ],
+                // todoList: [
+                //     {content:'吃饭',status:'active'},
+                //     {content:'睡觉',status:'active'},
+                //     {content:'起床',status:'active'}
+                // ],
                 inputText:"",
-                currentFilter: 'all',
-                flag:true
+                // currentFilter: 'all',
+                
             }
         },
         computed:{
             filterToDoList:function(){
-                let filterList = [];
-                for (let index = 0; index < this.todoList.length; index++) {
-                    const element =  this.todoList[index];
-                    if (element.status === this.currentFilter ||this.currentFilter === "all") {
-                        filterList.push(element);
-                    }
-                }
-                return filterList;
+            //     let filterList = [];
+            //     for (let index = 0; index < this.todoList.length; index++) {
+            //         const element =  this.todoList[index];
+            //         if (element.status === this.currentFilter ||this.currentFilter === "all") {
+            //             filterList.push(element);
+            //         }
+            //     }
+            //     return filterList;
+                return this.$store.getters.filterToDoList;
             }
+            
         },
         methods: {
             addInput:function(inputText){
-                this.todoList.push({
+                    this.$store.state.todoList.push({
                     content:inputText,
                     status:"active"
                 });
             },
             handlerFilter:function(status){
-                this.currentFilter = status;
+                console.log(status);
+                this.$store.state.currentFilter = status;
             },
             addChange:function(param){
                 this.inputText = param;
             },
-            selectItem(item){
+            selectItem:function(item){
                     item.select = !item.select;
-                   // console.log(item.select);
+                    console.log(item.select);
                     if(item.select){
                         item.status =  "completed";
                         //this.item.currentFilter = "completed";
